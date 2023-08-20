@@ -1182,6 +1182,9 @@ GameObject:
   - component: {fileID: 2030489400}
   - component: {fileID: 2030489399}
   - component: {fileID: 2030489398}
+  - component: {fileID: 2030489404}
+  - component: {fileID: 2030489403}
+  - component: {fileID: 2030489402}
   - component: {fileID: 2030489401}
   m_Layer: 0
   m_Name: Player
@@ -1312,17 +1315,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 2030489396}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354207b6d0a2c7440a3c4f2bf31fddda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialJumpVelocity: 20
+  jumpVelocity: 0
+--- !u!114 &2030489402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030489396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb5e3b470d948649a9210e00a58bd94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initalFallSpeed: 20
+  fallSpeed: 0
+  maxFallSpeed: 300
+--- !u!114 &2030489403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030489396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3297c2a80933d64db79884926a91285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 0
+  initialMovementSpeed: 20
+  maxMovementSpeed: 30
+--- !u!114 &2030489404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030489396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85969b9007477a54891ad539699015b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  movementSpeed: 20
-  jumpVelocity: 40
-  fallSpeed: 20
-  initialMovementSpeed: 20
-  initialJumpVelocity: 20
-  initalFallSpeed: 20
-  maxFallSpeed: 300
-  maxMovementSpeed: 30
