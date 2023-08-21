@@ -10,22 +10,38 @@ public class PlayerFall : MonoBehaviour
     [SerializeField] private float fallSpeed;
 
     private PlayerHandler playerHandler;
+    private PlayerJump playerJump;
+
+    private bool canFall = true;
 
     private void Awake() {
         playerHandler = GetComponent<PlayerHandler>();
+        playerJump = GetComponent<PlayerJump>();
     }
     private void Start() {
         fallSpeed = initalFallSpeed;
         playerHandler.OnNotGrounded += PlayerHandler_OnNotGrounded;
         playerHandler.OnGrounded += PlayerHandler_OnGrounded;
+        playerJump.OnJumping += PlayerJump_OnJumping;
+        playerJump.OnJumpingFinished += PlayerJump_OnJumpingFinished;
     }
 
     private void PlayerHandler_OnNotGrounded(object sender, System.EventArgs e) {
-        Fall();
+        if (canFall) {
+            Fall();
+        }
     }
 
     private void PlayerHandler_OnGrounded(object sender, System.EventArgs e) {
         ResetToInitialFallSpeed();
+    }
+
+    private void PlayerJump_OnJumping(object sender, System.EventArgs e) {
+        canFall = false;
+    }
+
+    private void PlayerJump_OnJumpingFinished(object sender, System.EventArgs e) {
+        canFall = true;
     }
 
     private void Fall() {
