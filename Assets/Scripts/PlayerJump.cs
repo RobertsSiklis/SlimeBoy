@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
@@ -24,7 +25,14 @@ public class PlayerJump : MonoBehaviour
         jumpVelocity = initialJumpVelocity;
         GameInput.Instance.OnJumpPressed += GameInput_OnJumpPressed;
         playerHandler.OnGrounded += PlayerHandler_OnGrounded;
+        playerHandler.OnRoofColision += PlayerHandler_OnRoofColision;
 
+    }
+
+    private void PlayerHandler_OnRoofColision(object sender, EventArgs e) {
+        isJumping = false;
+        jumpVelocity = initialJumpVelocity;
+        OnJumpingFinished?.Invoke(this, EventArgs.Empty);
     }
 
     private void PlayerHandler_OnGrounded(object sender, System.EventArgs e) {
@@ -46,6 +54,7 @@ public class PlayerJump : MonoBehaviour
             DecreaseJumpVelocity();
             ResetJumpVelocity();
         }
+        Debug.Log("Player can Jump" + isJumping);
     }
 
     private void Jump() {

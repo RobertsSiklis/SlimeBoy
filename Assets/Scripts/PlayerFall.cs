@@ -12,8 +12,8 @@ public class PlayerFall : MonoBehaviour
     private PlayerHandler playerHandler;
     private PlayerJump playerJump;
 
-    private bool canFall = true;
-
+    private bool canFall;
+    private float timer = 0f;
     private void Awake() {
         playerHandler = GetComponent<PlayerHandler>();
         playerJump = GetComponent<PlayerJump>();
@@ -25,24 +25,29 @@ public class PlayerFall : MonoBehaviour
         playerJump.OnJumping += PlayerJump_OnJumping;
         playerJump.OnJumpingFinished += PlayerJump_OnJumpingFinished;
     }
-
-    private void PlayerHandler_OnNotGrounded(object sender, System.EventArgs e) {
+    private void Update() {
+        Debug.Log("Player can fall" + canFall);
         if (canFall) {
             Fall();
         }
     }
+    private void PlayerHandler_OnNotGrounded(object sender, System.EventArgs e) {
+        canFall = true;
+    }
+
+    private void PlayerJump_OnJumpingFinished(object sender, System.EventArgs e) {
+        canFall = true;
+    }
 
     private void PlayerHandler_OnGrounded(object sender, System.EventArgs e) {
-        ResetToInitialFallSpeed();
+        canFall = false;
+        ResetToInitialFallSpeed();  
     }
 
     private void PlayerJump_OnJumping(object sender, System.EventArgs e) {
         canFall = false;
     }
 
-    private void PlayerJump_OnJumpingFinished(object sender, System.EventArgs e) {
-        canFall = true;
-    }
 
     private void Fall() {
         transform.position += Vector3.down * (fallSpeed * Time.deltaTime);
@@ -50,9 +55,16 @@ public class PlayerFall : MonoBehaviour
     }
 
     private void IncreaseFallSpeed() {
-        if (fallSpeed < maxFallSpeed) {
-           fallSpeed++;
+        
+        timer += Time.deltaTime;
+        if (timer >= 0.1f) {
+            if (fallSpeed < maxFallSpeed) {
+                fallSpeed++;
+            }
+            timer = 0f;
         }
+        Debug.Log(timer);
+
     }
 
     private void ResetToInitialFallSpeed() {
